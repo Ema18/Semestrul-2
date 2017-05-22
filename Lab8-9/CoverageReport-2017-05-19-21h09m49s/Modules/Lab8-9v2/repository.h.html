@@ -1,0 +1,94 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>repository.h</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+//
+// Created by Ema on 4/23/2017.
+//
+
+#pragma once
+
+#include &lt;vector&gt;
+#include "Movie.h"
+#include "Validator.h"
+#include &lt;fstream&gt;
+
+using namespace std;
+
+class Repository
+{
+private:
+	vector&lt;Movie&gt; movies;
+	Validator validator_class;
+
+public:
+	/**
+	Default constructor.
+	Initializes and object of type Repository
+	**/
+	Repository();
+
+	/**
+	Adds a movie to the repository
+	Input: m - Movie
+	Output: the movie is added to the repo
+	**/
+	void addMovie(const Movie&amp; m);
+
+	/**
+	Deletes a movie from the repository
+	Input: title of the movie to be deleted
+	Output: the movie, if found is deleted from the repo
+	**/
+	void deleteMovie(std::string title);
+
+	/**
+	* Updates a movie from the repository
+	* @param m the movie to be updated
+	*/
+	void updateMovie(const Movie&amp; m);
+
+	/**
+	* Search for a movie using its title
+	* @param title - the title of the movie
+	*/
+	Movie findByTitle(const std::string&amp; title);
+
+	/**
+	* Get the position of a movie in the repository.
+	* @param name - title of the movie
+	* @return pos - the position in the repository if it is found, 0 otherwise
+	*/
+	int getPosition(const std::string&amp; name);
+
+	/** Get all the elements from the repository */
+	vector&lt;Movie&gt; getAllElems();
+
+	/** Increments the number of likes */
+<span style = "background-color:#dfd">	void incLikes(std::string title) { this-&gt;movies[getPosition(title)].incLikes(); }</span>
+
+	/** Writes to file */
+	void writeToFile(string filename)
+<span style = "background-color:#dfd">	{
+		ofstream f(filename);
+		vector&lt;Movie&gt; to_write = this-&gt;getAllElems();
+		for (Movie mov : to_write)</span>
+		{
+<span style = "background-color:#dfd">			f &lt;&lt; mov.toString();
+		}
+		f.close();
+	}</span>
+
+	/** Destructor */
+<span style = "background-color:#dfd">	~Repository() {}</span>
+
+};</pre>
+	</body>
+</html>

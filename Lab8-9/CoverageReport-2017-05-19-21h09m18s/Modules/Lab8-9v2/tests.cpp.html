@@ -1,0 +1,214 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>tests.cpp</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+//
+// Created by Ema on 4/23/2017.
+//
+
+#include "Tests.h"
+#include &lt;assert.h&gt;
+#include "Repository.h"
+#include "Watchlist.h"
+#include "Controller.h"
+#include "Counter.h"
+#include &lt;string.h&gt;
+
+//void Tests::testCounter()
+//{
+//}
+
+void Tests::testMovie()
+<span style = "background-color:#dfd">{
+	Movie m{ "Deadpool", "Action", 2016, 90, "www.youtube.com", 200 };
+	assert(m.getTitle() == "Deadpool");
+	assert(m.getGenre() == "Action");
+	assert(m.getYear() == 2016);
+	assert(m.getLikes() == 90);
+	assert(m.getTrailer() == "www.youtube.com");
+	assert(m.getDuration() == 200);
+	assert(m.incLikes() == 91);
+	assert(m.operator&lt;(100) == false);
+	m.start();
+	m.str();
+	string s = m.toString();
+	printf("%d\n",m.getAlive());
+	printf("%d\n", m.getTotal());
+}</span>
+
+void Tests::testValidator()
+<span style = "background-color:#dfd">{
+	Repository repo{};
+	bool exc = false;
+	Movie m1{ "", "", 1888, -1, "", 150 };
+	try</span>
+	{
+<span style = "background-color:#dfd">		repo.addMovie(m1);</span>
+<span style = "background-color:#fdd">	}</span>
+	catch (std::runtime_error &amp; excep)
+	{
+<span style = "background-color:#dfd">		exc = true;
+	}
+	assert(exc == true);</span>
+
+<span style = "background-color:#dfd">	exc = false;
+	Movie m2{ "Logan", "", 1888, -1, "", 150 };
+	try</span>
+	{
+<span style = "background-color:#dfd">		repo.addMovie(m2);</span>
+<span style = "background-color:#fdd">	}</span>
+	catch (std::runtime_error &amp; excep2)
+	{
+<span style = "background-color:#dfd">		exc = true;
+	}
+	assert(exc == true);</span>
+
+<span style = "background-color:#dfd">	exc = false;
+	Movie m3{ "Logan", "Drama", 1888, -1, "", 150 };
+	try</span>
+	{
+<span style = "background-color:#dfd">		repo.addMovie(m3);</span>
+<span style = "background-color:#fdd">	}</span>
+	catch (std::runtime_error &amp; excep3)
+	{
+<span style = "background-color:#dfd">		exc = true;
+	}
+	assert(exc == true);</span>
+
+<span style = "background-color:#dfd">	exc = false;
+	Movie m4{ "Logan", "Drama", 2017, -1, "", 150 };
+	try</span>
+	{
+<span style = "background-color:#dfd">		repo.addMovie(m4);</span>
+<span style = "background-color:#fdd">	}</span>
+	catch (std::runtime_error &amp; excep4)
+	{
+<span style = "background-color:#dfd">		exc = true;
+	}
+	assert(exc == true);</span>
+
+<span style = "background-color:#dfd">	exc = false;
+	Movie m5{ "Logan", "Drama", 2017, 1, "", 150 };
+	try</span>
+	{
+<span style = "background-color:#dfd">		repo.addMovie(m5);</span>
+<span style = "background-color:#fdd">	}</span>
+	catch (std::runtime_error &amp; excep5)
+	{
+<span style = "background-color:#dfd">		exc = true;
+	}
+	assert(exc == true);
+}</span>
+
+void Tests::testRepository()
+<span style = "background-color:#dfd">{
+	Repository repo{};
+	Movie m{ "Deadpool", "Action", 2016, 90, "www.youtube.com", 200 };
+	repo.addMovie(m);
+	Movie res = repo.findByTitle("Deadpool");
+	assert(res.getTitle() == m.getTitle() &amp;&amp; res.getGenre() == m.getGenre());
+	res = repo.findByTitle("Logan");
+	assert(res.getTitle() == "");
+	repo.incLikes("Deadpool");
+	int likes = m.incLikes();
+	assert(likes == 91);</span>
+
+<span style = "background-color:#dfd">	vector&lt;Movie&gt; movies = repo.getAllElems();
+	assert(movies.size() == 1);</span>
+
+<span style = "background-color:#dfd">	int pos = repo.getPosition("Deadpool");
+	assert(pos == 0);
+	pos = repo.getPosition("Logan");
+	assert(pos == -1);</span>
+
+<span style = "background-color:#dfd">	Movie m3{ "Logan", "Drama", 2017, 200, "www.youtube.com", 120 };
+	repo.addMovie(m3);
+	pos = repo.getPosition("Logan");
+	assert(pos == 1);</span>
+
+<span style = "background-color:#dfd">	Movie m2{ "Deadpool", "Drama", 2000, 1, "www.youtube.com", 150 };
+	repo.updateMovie(m2);
+	Movie res2 = repo.findByTitle("Deadpool");</span>
+	/*
+	assert(m2.getTitle() == res2.getTitle());
+	assert(m2.getGenre() == res2.getGenre());
+	assert(m2.getYear() == res2.getYear());
+	assert(m2.getLikes() == res2.getLikes());
+	assert(m2.getTrailer == res2.getTrailer());
+	assert(m2.getDuration == res2.getDuration());
+	*/
+
+<span style = "background-color:#dfd">	repo.deleteMovie("Deadpool");
+	vector&lt;Movie&gt; movies2 = repo.getAllElems();
+	assert(movies2.size() == 1);
+}</span>
+
+void Tests::testWatchlist()
+<span style = "background-color:#dfd">{
+	Watchlist watchlist{};
+	Movie m1{ "Deadpool", "Action", 2016, 90, "www.youtube.com", 200 };
+	Movie m2{ "Logan", "Action", 2017, 80, "www.youtube.com", 180 };</span>
+
+<span style = "background-color:#dfd">	watchlist.add(m1);
+	watchlist.add(m2);
+	vector&lt;Movie&gt; movies3 = watchlist.getArray();</span>
+
+<span style = "background-color:#dfd">	assert(watchlist.getPosition("Deadpool") == 0);</span>
+
+<span style = "background-color:#dfd">	watchlist.del("Deadpool");
+	watchlist.del("The dark knight");
+	assert(watchlist.getPosition("Deadpool") == -1);</span>
+
+<span style = "background-color:#dfd">	Repository repo{};
+	repo.addMovie(m1);
+	repo.addMovie(m2);
+	vector&lt;Movie&gt; movies = watchlist.getSuggestions(repo.getAllElems(), "Action");
+	vector&lt;Movie&gt; movies2 = watchlist.getSuggestions(repo.getAllElems(), "");</span>
+	//assert(movies2 == repo.getAllElems());
+<span style = "background-color:#dfd">}</span>
+
+void Tests::testController()
+<span style = "background-color:#dfd">{
+	Repository repo{};
+	Controller ctrl2{};
+	Controller ctrl{ repo };</span>
+	
+	//Repository* r = ctrl.getRepo;
+	//assert(r == repo);
+
+<span style = "background-color:#dfd">	ctrl.addMovie("Deadpool", "Action", 2016, 90, "www.youtube.com", 200);
+	ctrl.addMovie("Logan", "Action", 2017, 80, "www.youtube.com", 180);
+	Movie m{ "Deadpool", "Action", 2016, 90, "www.youtube.com",200 };
+	ctrl.addMovieToWatchlist(m);</span>
+
+<span style = "background-color:#dfd">	assert(ctrl.getRepo().getAllElems().size() == 2);</span>
+
+<span style = "background-color:#dfd">	Watchlist list = ctrl.getWatchlist();
+	assert(list.getPosition("Deadpool") == 0);
+	assert(list.getPosition("The dark knight") == -1);
+	ctrl.incLikes("Deadpool");
+	ctrl.updateMovie("Deadpool", "Comedy", 2012, 20, "www.youtube.com", 40);
+	ctrl.deleteMovie("Deadpool");
+	assert(ctrl.getRepo().getAllElems().size() == 1);
+	vector&lt;Movie&gt; movies = ctrl.getAllElems();
+	assert(movies.size() == 1);
+}</span>
+
+void Tests::testAll()
+<span style = "background-color:#dfd">{</span>
+	//testCounter();
+<span style = "background-color:#dfd">	testMovie();
+	testRepository();
+	testWatchlist();
+	testController();
+	testValidator();
+}</span></pre>
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>movie.cpp</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+//
+// Created by Ema on 4/23/2017.
+//
+
+#include &lt;Windows.h&gt;
+#include &lt;shellapi.h&gt;
+#include "Movie.h"
+
+<span style = "background-color:#dfd">Movie::Movie() : title(""), genre(""), year(0), likes(0), trailer(""), duration(0) {}</span>
+
+Movie::Movie(const std::string&amp; title, const std::string&amp; genre, const int&amp; year, const int&amp; likes, const std::string&amp; trailer, const int&amp; duration)
+<span style = "background-color:#dfd">{
+	this-&gt;title = title;
+	this-&gt;genre = genre;
+	this-&gt;year = year;
+	this-&gt;likes = likes;
+	this-&gt;trailer = trailer;
+	this-&gt;duration = duration;
+}</span>
+
+Movie::Movie(const Movie&amp; mov)
+<span style = "background-color:#dfd">{
+	this-&gt;title = mov.title;
+	this-&gt;genre = mov.genre;
+	this-&gt;year = mov.year;
+	this-&gt;likes = mov.likes;
+	this-&gt;trailer = mov.trailer;
+	this-&gt;duration = mov.duration;
+}</span>
+
+Movie::~Movie()
+<span style = "background-color:#dfd">{</span>
+
+<span style = "background-color:#dfd">}</span>
+
+void Movie::start()
+<span style = "background-color:#dfd">{
+	ShellExecuteA(NULL, NULL, "chrome.exe", this-&gt;getTrailer().c_str(), NULL, SW_SHOWMAXIMIZED);
+}</span></pre>
+	</body>
+</html>

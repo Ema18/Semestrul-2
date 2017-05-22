@@ -1,0 +1,42 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>counter.h</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+//
+// Created by Ema on 4/23/2017.
+//
+
+#pragma once
+
+template &lt;class T&gt;
+class Counter
+{
+private:
+	static int total, alive;
+
+public:
+	/** Constructor to count the memory leaks */
+<span style = "background-color:#dfd">	Counter()</span>
+	{
+<span style = "background-color:#dfd">		total++;
+		alive++;
+	}</span>
+
+	/** Destructor */
+<span style = "background-color:#dfd">	~Counter() { alive--; }</span>
+
+	/** Gets the total leaks */
+<span style = "background-color:#dfd">	static int getTotal() { return total; }</span>
+
+	/** Gets the number of alive leaks at the moment */
+<span style = "background-color:#dfd">	static int getAlive() { return alive; }</span>
+};</pre>
+	</body>
+</html>

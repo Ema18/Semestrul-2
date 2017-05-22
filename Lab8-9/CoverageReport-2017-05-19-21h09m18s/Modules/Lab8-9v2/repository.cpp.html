@@ -1,0 +1,78 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>repository.cpp</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+//
+// Created by Ema on 4/23/2017.
+//
+
+#include "Repository.h"
+
+using namespace std;
+
+Repository::Repository()
+<span style = "background-color:#dfd">{
+	this-&gt;movies = vector&lt;Movie&gt;();
+	this-&gt;validator_class = Validator();
+}</span>
+
+void Repository::addMovie(const Movie&amp; m)
+<span style = "background-color:#dfd">{
+	validator_class.validate_movie(m);
+	this-&gt;movies.push_back(m);</span>
+	
+<span style = "background-color:#dfd">}</span>
+
+void Repository::deleteMovie(string title)
+<span style = "background-color:#dfd">{</span>
+	int pos;
+<span style = "background-color:#dfd">	pos = getPosition(title);
+	this-&gt;movies.erase(movies.begin() + pos);
+}</span>
+
+void Repository::updateMovie(const Movie&amp; m)
+<span style = "background-color:#dfd">{</span>
+	int pos;
+<span style = "background-color:#dfd">	pos = getPosition(m.getTitle());
+	this-&gt;movies.erase(movies.begin() + pos);
+	this-&gt;movies.push_back(m);
+}</span>
+
+vector&lt;Movie&gt; Repository::getAllElems()
+<span style = "background-color:#dfd">{
+	return this-&gt;movies;
+}</span>
+
+Movie Repository::findByTitle(const std::string &amp;title)
+<span style = "background-color:#dfd">{
+	for (int i = 0; i &lt; this-&gt;movies.size(); i++)</span>
+	{
+<span style = "background-color:#dfd">		Movie m = movies[i];
+		if (m.getTitle() == title)
+			return m;
+	}
+	return Movie{};
+}</span>
+
+int Repository::getPosition(const string&amp; name)
+
+<span style = "background-color:#dfd">{
+	int counter = 0;</span>
+
+<span style = "background-color:#dfd">	for (Movie mov : movies)</span>
+	{
+<span style = "background-color:#dfd">		if (mov.getTitle() == name)
+			return counter;
+		counter++;
+	}
+	return -1;
+}</span></pre>
+	</body>
+</html>

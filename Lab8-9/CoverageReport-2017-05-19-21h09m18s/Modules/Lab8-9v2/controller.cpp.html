@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>controller.cpp</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+//
+// Created by Ema on 4/23/2017.
+//
+
+#include "Controller.h"
+
+using namespace std;
+
+void Controller::addMovie(const std::string&amp; title, const std::string&amp; genre, const int&amp; year, const int&amp; likes, const std::string&amp; trailer, const int&amp; duration)
+<span style = "background-color:#dfd">{
+	Movie m(title, genre, year, likes, trailer, duration);
+	this-&gt;repo.addMovie(m);
+	this-&gt;repo.writeToFile("data.txt");
+}</span>
+
+void Controller::deleteMovie(const std::string&amp; title)
+<span style = "background-color:#dfd">{
+	this-&gt;repo.deleteMovie(title);
+	this-&gt;repo.writeToFile("data.txt");
+}</span>
+
+void Controller::updateMovie(const std::string&amp; title, const std::string&amp; genre, const int&amp; year, const int&amp; likes, const std::string&amp; trailer, const int&amp; duration)
+<span style = "background-color:#dfd">{
+	Movie m(title, genre, year, likes, trailer, duration);
+	this-&gt;repo.updateMovie(m);
+	this-&gt;repo.writeToFile("data.txt");
+}</span>
+
+vector&lt;Movie&gt; Controller::getAllElems()
+<span style = "background-color:#dfd">{
+	return this-&gt;repo.getAllElems();
+}</span>
+
+void Controller::addMovieToWatchlist(const Movie &amp;movie)
+<span style = "background-color:#dfd">{
+	this-&gt;watch.add(movie);
+}</span></pre>
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>watchlist.h</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+//
+// Created by Ema on 4/23/2017.
+//
+
+#pragma once
+#include &lt;vector&gt;
+#include "Movie.h"
+
+using namespace std;
+
+class Watchlist
+{
+private:
+	vector&lt;Movie&gt; movieList;
+
+public:
+	/** Constructor */
+	Watchlist(int capacity = 10);
+
+	/** Adds a movie to the watchlist. */
+	void add(const Movie&amp; movie);
+
+	/** Deletes a movie from the watchlist. */
+	int del(string title);
+
+	/** Gives suggestions of movies to the user
+	* @param repo - the repository
+	* @param needle - the genre after the user wants the movies to be filtered
+	* @return an array of type DynamicVector with the filtered movies
+	*/
+	vector&lt;Movie&gt; getSuggestions(vector&lt;Movie&gt; repo, string needle);
+
+	/** Getter for the Watchlist */
+<span style = "background-color:#dfd">	vector&lt;Movie&gt; getArray() { return this-&gt;movieList; }</span>
+
+	/** Get the position of a movie in the watchlist, searching by its title */
+	int getPosition(string name);
+};
+</pre>
+	</body>
+</html>

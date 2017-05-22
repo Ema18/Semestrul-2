@@ -1,0 +1,78 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>movie.h</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+//
+// Created by Ema on 4/23/2017.
+//
+
+#pragma once
+#include &lt;iostream&gt;
+#include "Counter.h"
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+
+using namespace std;
+
+class Movie : private Counter&lt;Movie&gt;
+{
+private:
+	std::string title;
+	std::string genre;
+	int year;
+	int likes;
+	std::string trailer;
+	int duration;
+
+public:
+	using Counter&lt;Movie&gt;::getTotal;
+	using Counter&lt;Movie&gt;::getAlive;
+
+	/** Constructors */
+	Movie();
+	Movie(const std::string&amp; title, const std::string&amp; genre, const int&amp; year, const int&amp; likes, const std::string&amp; trailer, const int&amp; duration);
+	Movie(const Movie&amp; mov);
+
+	/** Getters for all the parameters of an object of type Movie */
+<span style = "background-color:#dfd">	std::string getTitle() const { return title; }
+	std::string getGenre() const { return genre; }
+	int getYear() const { return year; }
+	int getLikes() const { return likes; }
+	std::string getTrailer() const { return trailer; }
+	int getDuration() const { return duration; }</span>
+
+	/** Destructor */
+	~Movie();
+
+	/** Starts the trailer: the page corresponding to the source link is opened in a browser. */
+	void start();
+
+	/** Displays nicely an object of type Movie. */
+<span style = "background-color:#dfd">	void str() {
+		std::cout &lt;&lt; "Title: " &lt;&lt; this-&gt;getTitle() &lt;&lt; ", Genre: " &lt;&lt; this-&gt;getGenre() &lt;&lt; ", Year: " &lt;&lt; this-&gt;getYear()</span>
+			&lt;&lt; ", No. of likes: " &lt;&lt; this-&gt;getLikes() &lt;&lt; ", Trailer link: " &lt;&lt; this-&gt;getTrailer() &lt;&lt; ", Duration: " &lt;&lt; this-&gt;getDuration() &lt;&lt; "\n";
+<span style = "background-color:#dfd">	}</span>
+
+	/** Display in a file */
+	string toString()
+<span style = "background-color:#dfd">	{
+		stringstream s;
+		s &lt;&lt; title &lt;&lt; ", " &lt;&lt; genre &lt;&lt; ", " &lt;&lt; year &lt;&lt; ", " &lt;&lt; likes &lt;&lt; ", " &lt;&lt; trailer &lt;&lt; ", " &lt;&lt; duration &lt;&lt; "\n";
+		return s.str();
+	}</span>
+
+	/** Increments the likes for the option 2 at the user mode .*/
+<span style = "background-color:#dfd">	int incLikes() { this-&gt;likes++; return this-&gt;likes; }</span>
+
+	/** Overload operator &lt; */
+<span style = "background-color:#dfd">	bool operator&lt;(int other) { return this-&gt;getDuration() &lt; other; }</span>
+};</pre>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>validator.cpp</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+//
+// Created by Ema on 4/24/2017.
+//
+
+#include "Validator.h"
+#include &lt;regex&gt;
+
+void Validator::validate_movie(const Movie &amp;mov)
+<span style = "background-color:#dfd">{
+	if (mov.getTitle().size() == 0)
+		throw std::runtime_error("Length can't be zero.");</span>
+
+<span style = "background-color:#dfd">	if (mov.getGenre().size() == 0)
+		throw std::runtime_error("Length can't be zero.");</span>
+
+<span style = "background-color:#dfd">	if (mov.getYear() &lt; 1900)
+		throw std::runtime_error("Year must be greater than 1900!");</span>
+
+<span style = "background-color:#dfd">	if (mov.getLikes() &lt; 0)
+		throw std::runtime_error("Likes can't be negative!");</span>
+
+<span style = "background-color:#dfd">	if (!regex_match(mov.getTrailer(), regex("w\{3\}\..*\..*")))
+		throw std::runtime_error("Link is invalid!");
+}</span></pre>
+	</body>
+</html>

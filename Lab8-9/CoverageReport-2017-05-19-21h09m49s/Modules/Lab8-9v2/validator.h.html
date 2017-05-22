@@ -1,0 +1,38 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>validator.h</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+//
+// Created by Ema on 4/24/2017.
+//
+
+#pragma once
+
+#include &lt;exception&gt;
+#include &lt;iostream&gt;
+#include "Movie.h"
+
+using namespace std;
+
+class Validator : exception
+{
+public:
+
+	/** Constructor */
+<span style = "background-color:#dfd">	Validator() {}</span>
+
+	/** Function to validate the input data of a movie
+	* TODO make it work tho
+	* @param mov the movie to be validated
+	*/
+	void validate_movie(const Movie&amp; mov);
+};</pre>
+	</body>
+</html>

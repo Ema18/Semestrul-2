@@ -1,0 +1,63 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>controller.h</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<body onload="prettyPrint()">
+        <h4></h4>
+		<pre class="prettyprint lang-cpp linenums">
+//
+// Created by Ema on 4/23/2017.
+//
+
+#pragma once
+#include "Repository.h"
+#include "Watchlist.h"
+
+using namespace std;
+
+class Controller
+{
+private:
+	Repository repo;
+	Watchlist watch;
+
+public:
+	/** Constructor */
+<span style = "background-color:#dfd">	Controller() {};</span>
+
+	/** Constructor with parameters */
+<span style = "background-color:#dfd">	Controller(const Repository&amp; r) : repo(r) {};</span>
+
+	/** Getters for repository and the watchlist(also a repository) */
+<span style = "background-color:#dfd">	Repository getRepo() const { return repo; }
+	Watchlist getWatchlist() const { return watch; }</span>
+
+	/** Adds a movie with the given data to the movie repository. */
+	void addMovie(const std::string&amp; title, const std::string&amp; genre, const int&amp; year, const int&amp; likes, const std::string&amp; trailer, const int&amp; duration);
+
+	/** Deletes a movie from the movie repository. */
+	void deleteMovie(const std::string&amp; title);
+
+	/** Updates a movie from the movie repository. */
+	void updateMovie(const std::string&amp; title, const std::string&amp; genre, const int&amp; year, const int&amp; likes, const std::string&amp; trailer, const int&amp; duration);
+
+	/** Gets the position of a specific movie in the repository(by title) */
+	int getPosition(const string&amp; title) { return this-&gt;repo.getPosition(title); }
+
+	/** Adds a movie to the watchlist */
+	void addMovieToWatchlist(const Movie&amp; movie);
+
+	/** Returns an array with all the element from the repository */
+	vector&lt;Movie&gt; getAllElems();
+
+<span style = "background-color:#dfd">	void incLikes(const std::string title) { this-&gt;repo.incLikes(title); }</span>
+
+	/** Destructor */
+<span style = "background-color:#dfd">	~Controller() {};</span>
+};</pre>
+	</body>
+</html>
